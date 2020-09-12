@@ -1,0 +1,58 @@
+<h1>Listado de asignaturas</h1>
+<hr>
+<div class="row">
+    <div class="col text-right">
+        <button class="btn btn-primary mr-3" routerLink="/asignatura/nuevo">
+            <i class="fa fa-plus"></i>
+            Agregar
+        </button>
+
+        <!-- <div class="form-group text-right"> -->
+        <button type="button" class="btn btn-danger" routerLink="/">
+            <i class="fa fa-arrow-left"></i>
+            Volver
+        </button>
+
+    </div>
+</div>
+
+<table *ngIf="!cargando && asignaturas.length > 0" class="table mt-3 animated fadeIn faster">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Color</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let asignatura of asignaturas">
+            <td>{{asignatura.id}}</td>
+            <td>{{asignatura.nombre}}</td>
+            <td>{{asignatura.color}}</td>
+            <td>
+                <button class="btn btn-info mr-1" [routerLink]="['/asignatura', asignatura.id]">
+                    <i class="fa fa-pencil"></i>
+                </button>
+                <button class="btn btn-danger" (click)="borrarAsignatura(asignatura.id)">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div *ngIf="!cargando && asignaturas.length === 0" class="alert alert-warning text-center mt-3 animated fadeIn faster">
+    <h4 class="alert-heading">No hay registros</h4>
+    <p>
+        <i class="fa fa-exclamation fa-2x"></i>
+    </p>
+</div>
+<div *ngIf="cargando" class="alert alert-info text-center mt-3 animated fadeIn faster">
+    <h4 class="alert-heading">Cargando</h4>
+    <p>
+        <i class="fa fa-sync-alt fa-spin fa-2x"></i>
+    </p>
+    <p class="mb-0">
+        Espere por favor
+    </p>
+</div>
